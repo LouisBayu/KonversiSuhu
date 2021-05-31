@@ -1,1 +1,2 @@
-# Program Konversi Suhu sederhana yang dibuat dengan menggunakan JFrame component pada Java.
+# Program Konversi Suhu
+Merupakan program konversi suhu sederhana yang dibuat dengan menggunakan JFrame component pada Java.
