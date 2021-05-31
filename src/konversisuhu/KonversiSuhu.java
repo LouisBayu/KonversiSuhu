@@ -3,7 +3,7 @@ package konversisuhu;
 // Nama     : Louis Bayu Krisna Redionando
 // NIM      : A11.2019.11773
 // Kelas    : A11.4416
-// PRAKTIKUM 5 PBO (LATIHAN) – Struktur Kendali IF
+// PRAKTIKUM KONVERSI SUHU
 
 
 import java.awt.CardLayout;
