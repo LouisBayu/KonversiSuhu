@@ -1,0 +1,674 @@
+package konversisuhu;
+
+// Nama     : Louis Bayu Krisna Redionando
+// NIM      : A11.2019.11773
+// Kelas    : A11.4416
+// PRAKTIKUM 5 PBO (LATIHAN) – Struktur Kendali IF
+
+
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.text.DecimalFormat;
+import javax.swing.UIManager;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
+public class KonversiSuhu extends javax.swing.JFrame {
+    int baris,kol;
+    private Object[][] dataTable = null;
+    private String[] header = {"No","Celcius","Fahrenheit","Kelvin","Reamur","Newton","Rankine","Delisle","Romer"};
+    private DefaultTableModel tblModel;
+    private Suhu suhu = new Suhu(); 
+    CardLayout cardLayout;
+    
+    public KonversiSuhu() {
+        try{
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()){
+                if("Windows".equals(info.getName()))
+                {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception ex){
+            ex.getMessage();
+        }
+        initComponents();
+        tblModel = new DefaultTableModel(dataTable,header);
+        tblSuhu.setModel(tblModel);
+        setView();
+    }
+    
+    public final void setView(){
+        DefaultTableCellRenderer thRender = new DefaultTableCellRenderer();
+        thRender.setBackground(new Color(255,198,72));
+        thRender.setForeground(new Color(255,255,255));
+        
+        for (int i=0;i<9;i++){
+            tblSuhu.getTableHeader().getColumnModel().getColumn(i).setHeaderRenderer(thRender);
+        }
+        
+        tblSuhu.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tblSuhu.getColumnModel().getColumn(0).setMaxWidth(50);
+        leftTemperature.getEditor().getEditorComponent().setBackground(new Color(255,230,143));
+        btnTableConvert.setBackground(new Color(255,230,143));
+        labelTableConvert.setForeground(new Color(240,190,3));
+        cardLayout = (CardLayout)(cardMenu.getLayout());
+        labelTableConvert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/konversisuhu/images/tblLogo1.png")));
+    }
+    
+    public void convert(){
+        double value = Double.parseDouble(leftTemperatureValue.getText());
+        String leftTemp = (String)leftTemperature.getSelectedItem();
+        String rightTemp = (String)rightTemperature.getSelectedItem();
+        double c,hasil;
+        hasil = 0;
+        
+        if (leftTemp.equals(rightTemp)){
+            rightTemperatureValue.setText(leftTemperatureValue.getText());
+        } else if (!"Celcius".equals(leftTemp) ){
+            c = suhu.toCelcius(value,leftTemp);
+            switch(rightTemp){
+                case "Celcius":
+                    hasil = c;
+                    break;
+                case "Fahrenheit":
+                    hasil = suhu.toFahrenheit(c);
+                    break;
+                case "Reamur":
+                    hasil = suhu.toReamur(c);
+                    break;
+                case "Kelvin":
+                    hasil = suhu.toKelvin(c);
+                    break;
+                case "Newton":
+                    hasil = suhu.toNewton(c);
+                    break;
+                case "Romer":
+                    hasil = suhu.toRomer(c);
+                    break;
+                case "Rankine":
+                    hasil = suhu.toRankine(c);
+                    break;
+                case "Delisle":
+                    hasil = suhu.toDelisle(c);
+                    break;
+            }
+            rightTemperatureValue.setText(new DecimalFormat("##.##").format(hasil));
+            
+        } else {
+            switch(rightTemp){
+                case "Celcius":
+                    hasil = value;
+                    break;
+                case "Fahrenheit":
+                    hasil = suhu.toFahrenheit(value);
+                    break;
+                case "Reamur":
+                    hasil = suhu.toReamur(value);
+                    break;
+                case "Kelvin":
+                    hasil = suhu.toKelvin(value);
+                    break;
+                case "Newton":
+                    hasil = suhu.toNewton(value);
+                    break;
+                case "Romer":
+                    hasil = suhu.toRomer(value);
+                    break;
+                case "Rankine":
+                    hasil = suhu.toRankine(value);
+                    break;
+                case "Delisle":
+                    hasil = suhu.toDelisle(value);
+                    break;
+            }
+            rightTemperatureValue.setText(new DecimalFormat("##.##").format(hasil)); 
+        }
+    }
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        bg = new javax.swing.JPanel();
+        cardMenu = new javax.swing.JPanel();
+        cardTableConvert = new javax.swing.JPanel();
+        nAwalLabel = new javax.swing.JLabel();
+        nAwal = new javax.swing.JTextField();
+        nAkhir = new javax.swing.JTextField();
+        nAkhirLabel = new javax.swing.JLabel();
+        labelJudul1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblSuhu = new javax.swing.JTable();
+        btnProses = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        btnClear = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        cardAdvanced = new javax.swing.JPanel();
+        rightTemperatureValue = new javax.swing.JTextField();
+        leftTemperatureValue = new javax.swing.JTextField();
+        rightTemperature = new javax.swing.JComboBox<>();
+        leftTemperature = new javax.swing.JComboBox<>();
+        labelJudul2 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        sidePanel = new javax.swing.JPanel();
+        logo = new javax.swing.JLabel();
+        btnAdvanced = new javax.swing.JPanel();
+        labelAdvancedConvert = new javax.swing.JLabel();
+        btnTableConvert = new javax.swing.JPanel();
+        labelTableConvert = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Program Converter Suhu ");
+        setLocationByPlatform(true);
+        setResizable(false);
+
+        bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.setPreferredSize(new java.awt.Dimension(1366, 798));
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cardMenu.setBackground(new java.awt.Color(255, 255, 255));
+        cardMenu.setLayout(new java.awt.CardLayout());
+
+        cardTableConvert.setBackground(new java.awt.Color(255, 255, 255));
+        cardTableConvert.setMinimumSize(new java.awt.Dimension(1029, 798));
+        cardTableConvert.setPreferredSize(new java.awt.Dimension(1060, 798));
+        cardTableConvert.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        nAwalLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        nAwalLabel.setForeground(new java.awt.Color(240, 190, 3));
+        nAwalLabel.setText("Nilai Awal");
+        cardTableConvert.add(nAwalLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        nAwal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        nAwal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nAwal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
+        nAwal.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        nAwal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nAwalActionPerformed(evt);
+            }
+        });
+        cardTableConvert.add(nAwal, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 130, 30));
+
+        nAkhir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        nAkhir.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nAkhir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
+        nAkhir.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        nAkhir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nAkhirActionPerformed(evt);
+            }
+        });
+        cardTableConvert.add(nAkhir, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 130, 30));
+
+        nAkhirLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        nAkhirLabel.setForeground(new java.awt.Color(240, 190, 3));
+        nAkhirLabel.setText("Nilai Akhir");
+        cardTableConvert.add(nAkhirLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        labelJudul1.setFont(new java.awt.Font("Segoe UI", 0, 80)); // NOI18N
+        labelJudul1.setForeground(new java.awt.Color(240, 190, 3));
+        labelJudul1.setText("Tabel Konversi Suhu");
+        cardTableConvert.add(labelJudul1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        jSeparator1.setBackground(new java.awt.Color(240, 190, 3));
+        jSeparator1.setForeground(new java.awt.Color(240, 190, 3));
+        jSeparator1.setPreferredSize(new java.awt.Dimension(50, 50));
+        cardTableConvert.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 1000, 10));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(240, 190, 3));
+        jLabel2.setText(":");
+        cardTableConvert.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 10, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(240, 190, 3));
+        jLabel3.setText(":");
+        cardTableConvert.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
+
+        tblSuhu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
+        tblSuhu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        tblSuhu.setForeground(new java.awt.Color(102, 102, 102));
+        tblSuhu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
+            }
+        ));
+        tblSuhu.setGridColor(new java.awt.Color(255, 255, 255));
+        tblSuhu.setRowHeight(30);
+        tblSuhu.setSelectionBackground(new java.awt.Color(255, 198, 72));
+        tblSuhu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tblSuhu);
+
+        cardTableConvert.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 359, 1000, 420));
+
+        btnProses.setBackground(new java.awt.Color(240, 190, 3));
+        btnProses.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 190, 3)));
+        btnProses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProsesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnProsesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnProsesMouseExited(evt);
+            }
+        });
+        btnProses.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Proses");
+        jLabel4.setAlignmentX(0.5F);
+        btnProses.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 7, -1, -1));
+
+        cardTableConvert.add(btnProses, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 100, 40));
+
+        btnClear.setBackground(new java.awt.Color(255, 102, 51));
+        btnClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 51)));
+        btnClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnClearMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnClearMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnClearMouseExited(evt);
+            }
+        });
+        btnClear.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Clear");
+        jLabel1.setAlignmentX(0.5F);
+        btnClear.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 7, -1, -1));
+
+        cardTableConvert.add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 300, 100, 40));
+
+        cardMenu.add(cardTableConvert, "cardTableConvert");
+
+        cardAdvanced.setBackground(new java.awt.Color(255, 255, 255));
+        cardAdvanced.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        rightTemperatureValue.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        rightTemperatureValue.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        rightTemperatureValue.setText("0");
+        rightTemperatureValue.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 190, 3), 3));
+        rightTemperatureValue.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        rightTemperatureValue.setFocusable(false);
+        cardAdvanced.add(rightTemperatureValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 310, 340, 90));
+
+        leftTemperatureValue.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        leftTemperatureValue.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        leftTemperatureValue.setText("0");
+        leftTemperatureValue.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 190, 3), 3));
+        cardAdvanced.add(leftTemperatureValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 340, 90));
+
+        rightTemperature.setBackground(new java.awt.Color(255, 198, 72));
+        rightTemperature.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        rightTemperature.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celcius", "Fahrenheit", "Reamur", "Kelvin", "Newton", "Rankine", "Delisle", "Romer" }));
+        rightTemperature.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rightTemperatureActionPerformed(evt);
+            }
+        });
+        cardAdvanced.add(rightTemperature, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 400, 340, 40));
+
+        leftTemperature.setBackground(new java.awt.Color(255, 198, 72));
+        leftTemperature.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        leftTemperature.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celcius", "Fahrenheit", "Reamur", "Kelvin", "Newton", "Rankine", "Delisle", "Romer" }));
+        leftTemperature.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leftTemperatureActionPerformed(evt);
+            }
+        });
+        cardAdvanced.add(leftTemperature, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 340, 40));
+
+        labelJudul2.setFont(new java.awt.Font("Segoe UI", 0, 80)); // NOI18N
+        labelJudul2.setForeground(new java.awt.Color(240, 190, 3));
+        labelJudul2.setText("Advanced Convert");
+        cardAdvanced.add(labelJudul2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        jSeparator2.setBackground(new java.awt.Color(240, 190, 3));
+        jSeparator2.setForeground(new java.awt.Color(240, 190, 3));
+        jSeparator2.setPreferredSize(new java.awt.Dimension(50, 50));
+        cardAdvanced.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 1000, 10));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(240, 190, 3));
+        jLabel5.setText("To :");
+        cardAdvanced.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(240, 190, 3));
+        jLabel6.setText("From :");
+        cardAdvanced.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 72)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(240, 190, 3));
+        jLabel7.setText("=");
+        cardAdvanced.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, -1, 60));
+
+        cardMenu.add(cardAdvanced, "cardAdvanced");
+
+        bg.add(cardMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 1060, 798));
+
+        sidePanel.setBackground(new java.awt.Color(240, 190, 3));
+        sidePanel.setPreferredSize(new java.awt.Dimension(310, 0));
+        sidePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/konversisuhu/images/logo.png"))); // NOI18N
+        sidePanel.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 60, 260, -1));
+
+        btnAdvanced.setBackground(new java.awt.Color(255, 198, 72));
+        btnAdvanced.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdvanced.setPreferredSize(new java.awt.Dimension(100, 70));
+        btnAdvanced.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAdvancedMousePressed(evt);
+            }
+        });
+
+        labelAdvancedConvert.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        labelAdvancedConvert.setForeground(new java.awt.Color(255, 255, 255));
+        labelAdvancedConvert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/konversisuhu/images/adv.png"))); // NOI18N
+        labelAdvancedConvert.setText("Advanced Convert");
+        labelAdvancedConvert.setIconTextGap(15);
+        labelAdvancedConvert.setIconTextGap(20);
+
+        javax.swing.GroupLayout btnAdvancedLayout = new javax.swing.GroupLayout(btnAdvanced);
+        btnAdvanced.setLayout(btnAdvancedLayout);
+        btnAdvancedLayout.setHorizontalGroup(
+            btnAdvancedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnAdvancedLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(labelAdvancedConvert)
+                .addGap(37, 37, 37))
+        );
+        btnAdvancedLayout.setVerticalGroup(
+            btnAdvancedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelAdvancedConvert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        sidePanel.add(btnAdvanced, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 310, 80));
+        btnAdvanced.getAccessibleContext().setAccessibleName("");
+
+        btnTableConvert.setBackground(new java.awt.Color(255, 198, 72));
+        btnTableConvert.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTableConvert.setPreferredSize(new java.awt.Dimension(100, 70));
+        btnTableConvert.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnTableConvertMousePressed(evt);
+            }
+        });
+
+        labelTableConvert.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        labelTableConvert.setForeground(new java.awt.Color(255, 255, 255));
+        labelTableConvert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/konversisuhu/images/tblLogo.png"))); // NOI18N
+        labelTableConvert.setText("Table Convert");
+        labelTableConvert.setIconTextGap(15);
+
+        javax.swing.GroupLayout btnTableConvertLayout = new javax.swing.GroupLayout(btnTableConvert);
+        btnTableConvert.setLayout(btnTableConvertLayout);
+        btnTableConvertLayout.setHorizontalGroup(
+            btnTableConvertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnTableConvertLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(labelTableConvert)
+                .addContainerGap(80, Short.MAX_VALUE))
+        );
+        btnTableConvertLayout.setVerticalGroup(
+            btnTableConvertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelTableConvert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        sidePanel.add(btnTableConvert, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 310, 80));
+        btnTableConvert.getAccessibleContext().setAccessibleName("");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Copyright 2021 - Louis Bayu");
+        sidePanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 760, -1, -1));
+
+        bg.add(sidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 798));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTableConvertMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTableConvertMousePressed
+        cardMenu.setVisible(true);
+        btnTableConvert.setBackground(new Color(255,230,143));
+        btnAdvanced.setBackground(new Color(255,198,72));
+        labelTableConvert.setForeground(new Color(240,190,3));
+        labelAdvancedConvert.setForeground(new Color(255,255,255));
+        labelTableConvert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/konversisuhu/images/tblLogo1.png")));
+        labelAdvancedConvert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/konversisuhu/images/adv.png")));
+        cardLayout.show(cardMenu, "cardTableConvert");
+    }//GEN-LAST:event_btnTableConvertMousePressed
+
+    private void btnAdvancedMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdvancedMousePressed
+        cardMenu.setVisible(true);
+        btnAdvanced.setBackground(new Color(255,230,143));
+        btnTableConvert.setBackground(new Color(255,198,72));
+        labelAdvancedConvert.setForeground(new Color(240,190,3));
+        labelTableConvert.setForeground(new Color(255,255,255));
+        labelTableConvert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/konversisuhu/images/tblLogo.png")));
+        labelAdvancedConvert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/konversisuhu/images/adv1.png")));
+        cardLayout.show(cardMenu, "cardAdvanced");
+        leftTemperatureValue.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                coba();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                coba();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                coba();
+            }
+            public void coba(){
+                if (!"".equals(leftTemperatureValue.getText())){
+                    convert();
+                } else {
+                    rightTemperatureValue.setText("");
+                }
+            }
+        });
+        
+        
+
+    }//GEN-LAST:event_btnAdvancedMousePressed
+
+    private void nAwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nAwalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nAwalActionPerformed
+
+    private void nAkhirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nAkhirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nAkhirActionPerformed
+
+    private void btnProsesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProsesMouseEntered
+        btnProses.setBackground(new Color(240,169,9));
+    }//GEN-LAST:event_btnProsesMouseEntered
+
+    private void btnProsesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProsesMouseExited
+        btnProses.setBackground(new Color(240,190,3));
+    }//GEN-LAST:event_btnProsesMouseExited
+
+    private void btnClearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseExited
+        btnClear.setBackground(new Color(255,102,51));
+    }//GEN-LAST:event_btnClearMouseExited
+
+    private void btnClearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseEntered
+        btnClear.setBackground(new Color(255,72,42));
+    }//GEN-LAST:event_btnClearMouseEntered
+
+    private void btnProsesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProsesMouseClicked
+        int a = Integer.parseInt(nAwal.getText());
+        int b = Integer.parseInt(nAkhir.getText());
+        kol = 9;
+        baris = (b-a)+1;
+        dataTable = new Object[baris][kol];
+        int c;
+        int x = 0;
+        for(c=a; c<=b ;c++){
+            dataTable[x][0] = x+1;
+            dataTable[x][1] = c;
+            dataTable[x][2] = suhu.toFahrenheit(c);
+            dataTable[x][3] = suhu.toKelvin(c);
+            dataTable[x][4] = suhu.toReamur(c);
+            dataTable[x][5] = suhu.toNewton(c);
+            dataTable[x][6] = suhu.toRankine(c);
+            dataTable[x][7] = suhu.toDelisle(c);
+            dataTable[x][8] = suhu.toRomer(c);
+            x++;
+        }
+        tblModel.setDataVector(dataTable,header);
+        tblSuhu.setModel(tblModel);
+        setView();
+    }//GEN-LAST:event_btnProsesMouseClicked
+
+    private void btnClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseClicked
+        tblModel.setRowCount(0);
+        nAwal.setText("");
+        nAkhir.setText("");
+    }//GEN-LAST:event_btnClearMouseClicked
+
+    private void leftTemperatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftTemperatureActionPerformed
+        convert();
+    }//GEN-LAST:event_leftTemperatureActionPerformed
+
+    private void rightTemperatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightTemperatureActionPerformed
+        convert();
+    }//GEN-LAST:event_rightTemperatureActionPerformed
+    
+    /**
+     * @param args the command line arguments
+     */
+    
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(KonversiSuhu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(KonversiSuhu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(KonversiSuhu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(KonversiSuhu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new KonversiSuhu().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bg;
+    private javax.swing.JPanel btnAdvanced;
+    private javax.swing.JPanel btnClear;
+    private javax.swing.JPanel btnProses;
+    private javax.swing.JPanel btnTableConvert;
+    private javax.swing.JPanel cardAdvanced;
+    private javax.swing.JPanel cardMenu;
+    private javax.swing.JPanel cardTableConvert;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel labelAdvancedConvert;
+    private javax.swing.JLabel labelJudul1;
+    private javax.swing.JLabel labelJudul2;
+    private javax.swing.JLabel labelTableConvert;
+    private javax.swing.JComboBox<String> leftTemperature;
+    private javax.swing.JTextField leftTemperatureValue;
+    private javax.swing.JLabel logo;
+    private javax.swing.JTextField nAkhir;
+    private javax.swing.JLabel nAkhirLabel;
+    private javax.swing.JTextField nAwal;
+    private javax.swing.JLabel nAwalLabel;
+    private javax.swing.JComboBox<String> rightTemperature;
+    private javax.swing.JTextField rightTemperatureValue;
+    private javax.swing.JPanel sidePanel;
+    private javax.swing.JTable tblSuhu;
+    // End of variables declaration//GEN-END:variables
+}
